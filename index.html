@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protrader Fund Operation: Mô Hình Quản Lý Vốn Tối Ưu & Win-Win</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .card-shadow { box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
+        .text-gradient { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .win-win-bg { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+        .success-bg { background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); }
+        .risk-bg { background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%); }
+        .ai-bg { background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%); }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="gradient-bg text-white py-12">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center">
+                <h1 class="text-5xl font-bold mb-4">Protrader Fund Operation</h1>
+                <p class="text-2xl mb-6">Mô Hình Quản Lý Vốn Tối Ưu & Win-Win</p>
+                <div class="flex justify-center items-center space-x-8 text-lg">
+                    <div class="flex items-center">
+                        <i class="fas fa-handshake text-3xl mr-3"></i>
+                        <span>Win-Win Partnership</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-robot text-3xl mr-3"></i>
+                        <span>AI Automation</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-shield-alt text-3xl mr-3"></i>
+                        <span>Risk Control</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-6 py-12">
+        
+        <!-- Section I: Tổng Quan Mô Hình -->
+        <section class="mb-12">
+            <div class="bg-white rounded-xl card-shadow p-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center">
+                    <i class="fas fa-chart-line text-blue-600 mr-4"></i>
+                    I. Tổng Quan Mô Hình
+                </h2>
+                <p class="text-lg text-gray-700 mb-8 leading-relaxed">
+                    Protrader Fund Operation là hệ thống quản lý vốn đa tài khoản trên nền tảng Exness, kết hợp kiểm soát rủi ro thông minh và cơ chế chia sẻ lợi nhuận công bằng giữa nhà đầu tư (Father Account) và trader (Trade Account).
+                </p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="win-win-bg rounded-lg p-6 text-white text-center">
+                        <i class="fas fa-handshake text-4xl mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2">Win-Win</h3>
+                        <p>Cả nhà đầu tư và trader cùng hưởng lợi từ lợi nhuận</p>
+                    </div>
+                    <div class="ai-bg rounded-lg p-6 text-white text-center">
+                        <i class="fas fa-robot text-4xl mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2">Tự động hóa</h3>
+                        <p>AI Agent quản lý cấp vốn, thu hồi và chia sẻ lợi nhuận</p>
+                    </div>
+                    <div class="risk-bg rounded-lg p-6 text-white text-center">
+                        <i class="fas fa-shield-alt text-4xl mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2">Kiểm soát rủi ro</h3>
+                        <p>MDL (5-10%/ngày), MDD (30% vốn gốc)</p>
+                    </div>
+                    <div class="success-bg rounded-lg p-6 text-white text-center">
+                        <i class="fas fa-unlock text-4xl mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2">Linh hoạt</h3>
+                        <p>Nhà đầu tư có thể unlock vốn bất cứ lúc nào</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section II: Cấu Trúc Mô Hình -->
+        <section class="mb-12">
+            <div class="bg-white rounded-xl card-shadow p-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center">
+                    <i class="fas fa-sitemap text-blue-600 mr-4"></i>
+                    II. Cấu Trúc Mô Hình
+                </h2>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                    <!-- Father Account -->
+                    <div class="bg-blue-50 rounded-lg p-6">
+                        <h3 class="text-2xl font-bold text-blue-800 mb-4 flex items-center">
+                            <i class="fas fa-university mr-3"></i>
+                            Father Account (Tài Khoản Chính)
+                        </h3>
+                        <div class="space-y-4">
+                            <div class="bg-white rounded-lg p-4">
+                                <h4 class="font-semibold text-gray-800 mb-2">Quản lý vốn</h4>
+                                <ul class="text-gray-600 space-y-1">
+                                    <li>• Tạo & cấp vốn cho Trade Account</li>
+                                    <li>• Theo dõi hiệu suất từng trader</li>
+                                    <li>• Không giao dịch</li>
+                                </ul>
+                            </div>
+                            <div class="bg-white rounded-lg p-4">
+                                <h4 class="font-semibold text-gray-800 mb-2">Gateway tiền</h4>
+                                <ul class="text-gray-600 space-y-1">
+                                    <li>• Nạp/rút USDT (TRC20)</li>
+                                    <li>• Nhận lợi nhuận từ Trade Account</li>
+                                    <li>• Full quyền kiểm soát dòng tiền</li>
+                                </ul>
+                            </div>
+                            <div class="bg-white rounded-lg p-4">
+                                <h4 class="font-semibold text-gray-800 mb-2">Tự động hóa</h4>
+                                <ul class="text-gray-600 space-y-1">
+                                    <li>• AI Agent tự động cấp vốn</li>
+                                    <li>• Thu hồi lợi nhuận tự động</li>
+                                    <li>• Tùy chỉnh MDL/MDD</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Trade Account -->
+                    <div class="bg-green-50 rounded-lg p-6">
+                        <h3 class="text-2xl font-bold text-green-800 mb-4 flex items-center">
+                            <i class="fas fa-chart-bar mr-3"></i>
+                            Trade Account (Tài Khoản Giao Dịch)
+                        </h3>
+                        <div class="space-y-4">
+                            <div class="bg-white rounded-lg p-4">
+                                <h4 class="font-semibold text-gray-800 mb-2">Đặc điểm</h4>
+                                <ul class="text-gray-600 space-y-1">
+                                    <li>• Chỉ được phép Long/Short</li>
+                                    <li>• Không rút tiền trực tiếp</li>
+                                    <li>• Phân nhóm theo khả năng</li>
+                                </ul>
+                            </div>
+                            <div class="bg-white rounded-lg p-4">
+                                <h4 class="font-semibold text-gray-800 mb-2">Quy định</h4>
+                                <ul class="text-gray-600 space-y-1">
+                                    <li>• Chuyển về Father Account</li>
+                                    <li>• Tái cấp vốn 5-10%/ngày</li>
+                                    <li>• MDL tối đa 5-10%/ngày</li>
+                                </ul>
+                            </div>
+                            <div class="bg-white rounded-lg p-4">
+                                <h4 class="font-semibold text-gray-800 mb-2">Cấp độ</h4>
+                                <ul class="text-gray-600 space-y-1">
+                                    <li>• Beginner: $100/day</li>
+                                    <li>• Pro: $5,000/day</li>
+                                    <li>• Master: $10,000+/day</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section III: Nguyên Tắc Vận Hành -->
+        <section class="mb-12">
+            <div class="bg-white rounded-xl card-shadow p-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center">
+                    <i class="fas fa-cogs text-blue-600 mr-4"></i>
+                    III. Nguyên Tắc Vận Hành (Key Rules)
+                </h2>
+
+                <!-- Daily Funding Process -->
+                <div class="mb-8">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">1. Quy Trình Daily Funding</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-blue-50 rounded-lg p-6">
+                            <h4 class="text-xl font-semibold text-blue-800 mb-3 flex items-center">
+                                <i class="fas fa-sun mr-2"></i>
+                                5:00 AM
+                            </h4>
+                            <p class="text-gray-700 mb-2">Father Account cấp vốn (5-10% tổng tích lũy) cho Trade Account.</p>
+                            <div class="bg-blue-100 rounded p-3 text-sm">
+                                <strong>Ví dụ:</strong> Trade Account có $50,000 → Nhận $5,000 (10%)
+                            </div>
+                        </div>
+                        <div class="bg-purple-50 rounded-lg p-6">
+                            <h4 class="text-xl font-semibold text-purple-800 mb-3 flex items-center">
+                                <i class="fas fa-moon mr-2"></i>
+                                11:00 PM
+                            </h4>
+                            <p class="text-gray-700">Trade Account chuyển toàn bộ số dư + lịch sử giao dịch về Father Account.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Risk Management -->
+                <div class="mb-8">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">2. Quản Lý Rủi Ro (Risk Management)</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-red-50 rounded-lg p-6">
+                            <h4 class="text-xl font-semibold text-red-800 mb-3 flex items-center">
+                                <i class="fas fa-exclamation-triangle mr-2"></i>
+                                MDL (Max Daily Loss)
+                            </h4>
+                            <ul class="text-gray-700 space-y-2">
+                                <li>• Mặc định: 5-10%/ngày (tùy khẩu vị rủi ro)</li>
+                                <li>• Nếu Trade Account thua >10% → Tự động dừng giao dịch</li>
+                            </ul>
+                        </div>
+                        <div class="bg-orange-50 rounded-lg p-6">
+                            <h4 class="text-xl font-semibold text-orange-800 mb-3 flex items-center">
+                                <i class="fas fa-chart-line mr-2"></i>
+                                MDD (Max Drawdown)
+                            </h4>
+                            <ul class="text-gray-700 space-y-2">
+                                <li>• Nếu Total PnL âm >30% vốn gốc</li>
+                                <li>• → Ngừng cấp vốn 7 ngày & đánh giá lại</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Profit Sharing -->
+                <div class="mb-8">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">3. Cơ Chế Profit Sharing</h3>
+                    <div class="bg-green-50 rounded-lg p-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="text-xl font-semibold text-green-800 mb-3 flex items-center">
+                                    <i class="fas fa-percentage mr-2"></i>
+                                    Chia sẻ lợi nhuận
+                                </h4>
+                                <ul class="text-gray-700 space-y-2">
+                                    <li>• Trader nhận 30% lợi nhuận/tuần (mặc định)</li>
+                                    <li>• Hiệu suất cao → Tăng % chia lợi nhuận (lên tới 40%)</li>
+                                </ul>
+                            </div>
+                            <div class="bg-white rounded-lg p-4">
+                                <div style="height: 200px;">
+                                    <canvas id="profitChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section IV: Ví Dụ Minh Họa -->
+        <section class="mb-12">
+            <div class="bg-white rounded-xl card-shadow p-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center">
+                    <i class="fas fa-calculator text-blue-600 mr-4"></i>
+                    IV. Ví Dụ Minh Họa
+                </h2>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Successful Scenario -->
+                    <div class="success-bg rounded-lg p-6 text-white">
+                        <h3 class="text-2xl font-bold mb-4 flex items-center">
+                            <i class="fas fa-chart-line mr-3"></i>
+                            Kịch Bản Thành Công
+                        </h3>
+                        <div class="bg-white bg-opacity-20 rounded-lg p-4 mb-4">
+                            <table class="w-full text-white">
+                                <thead>
+                                    <tr class="border-b border-white border-opacity-30">
+                                        <th class="text-left py-2">Ngày</th>
+                                        <th class="text-left py-2">Vốn Ban Đầu</th>
+                                        <th class="text-left py-2">Lợi Nhuận</th>
+                                        <th class="text-left py-2">Tổng Tích Lũy</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="py-2">Day 1</td>
+                                        <td class="py-2">$50,000</td>
+                                        <td class="py-2 text-green-300">+$2,000</td>
+                                        <td class="py-2">$52,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-2">Day 2</td>
+                                        <td class="py-2">$52,000</td>
+                                        <td class="py-2 text-green-300">+$1,500</td>
+                                        <td class="py-2">$53,500</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-2">Day 3</td>
+                                        <td class="py-2">$53,500</td>
+                                        <td class="py-2 text-green-300">+$3,000</td>
+                                        <td class="py-2">$56,500</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="text-center">
+                            <p class="text-xl font-semibold">Trader nhận 30% lợi nhuận = $1,950/tuần</p>
+                        </div>
+                    </div>
+
+                    <!-- Risk Scenario -->
+                    <div class="risk-bg rounded-lg p-6 text-white">
+                        <h3 class="text-2xl font-bold mb-4 flex items-center">
+                            <i class="fas fa-exclamation-triangle mr-3"></i>
+                            Kịch Bản Rủi Ro
+                        </h3>
+                        <div class="bg-white bg-opacity-20 rounded-lg p-4 mb-4">
+                            <div class="text-center">
+                                <div class="text-3xl font-bold mb-2">$50,000</div>
+                                <p class="mb-4">Vốn gốc</p>
+                                <div class="text-3xl font-bold text-red-300 mb-2">-$15,000</div>
+                                <p class="mb-4">Thua lỗ (30%)</p>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <p class="text-xl font-semibold">Tạm dừng cấp vốn 7 ngày → Đánh giá lại chiến lược</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section V: Tự Động Hóa & Tối Ưu Hóa -->
+        <section class="mb-12">
+            <div class="bg-white rounded-xl card-shadow p-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center">
+                    <i class="fas fa-robot text-blue-600 mr-4"></i>
+                    V. Tự Động Hóa & Tối Ưu Hóa
+                </h2>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <!-- AI Agent -->
+                    <div class="ai-bg rounded-lg p-6 text-white">
+                        <h3 class="text-xl font-bold mb-4 flex items-center">
+                            <i class="fas fa-brain mr-3"></i>
+                            AI Agent Tự Động
+                        </h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle mt-1 mr-2"></i>
+                                <span>Tự động cấp/thu hồi vốn hàng ngày</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle mt-1 mr-2"></i>
+                                <span>Tính toán profit share & gửi request thanh toán</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle mt-1 mr-2"></i>
+                                <span>Cảnh báo rủi ro nếu vi phạm MDL/MDD</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Global Monitoring -->
+                    <div class="bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg p-6 text-white">
+                        <h3 class="text-xl font-bold mb-4 flex items-center">
+                            <i class="fas fa-globe mr-3"></i>
+                            Global Risk Monitoring
+                        </h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle mt-1 mr-2"></i>
+                                <span>So sánh hiệu suất giữa các tài khoản</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle mt-1 mr-2"></i>
+                                <span>Đề xuất điều chỉnh MDL/MDD dựa trên backtest</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Optimization -->
+                    <div class="bg-gradient-to-br from-green-500 to-green-600 rounded-lg p-6 text-white">
+                        <h3 class="text-xl font-bold mb-4 flex items-center">
+                            <i class="fas fa-chart-line mr-3"></i>
+                            Phương Án Tối Ưu
+                        </h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle mt-1 mr-2"></i>
+                                <span>Dynamic Funding: Điều chỉnh % tái cấp vốn</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle mt-1 mr-2"></i>
+                                <span>Trader Ranking: Xếp hạng ưu tiên cấp vốn</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle mt-1 mr-2"></i>
+                                <span>Auto-Lock Capital: Khóa vốn nếu bất thường</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section VI: Kết Luận -->
+        <section class="mb-12">
+            <div class="gradient-bg rounded-xl p-8 text-white">
+                <h2 class="text-3xl font-bold mb-6 flex items-center">
+                    <i class="fas fa-trophy mr-4"></i>
+                    VI. Kết Luận: Tại Sao Nên Chọn Protrader Fund Operation?
+                </h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-white bg-opacity-10 rounded-lg p-6 text-center">
+                        <i class="fas fa-user-tie text-4xl mb-4"></i>
+                        <h3 class="text-xl font-bold mb-3">Nhà đầu tư</h3>
+                        <p>Kiểm soát rủi ro tối đa, lợi nhuận ổn định</p>
+                    </div>
+                    <div class="bg-white bg-opacity-10 rounded-lg p-6 text-center">
+                        <i class="fas fa-chart-bar text-4xl mb-4"></i>
+                        <h3 class="text-xl font-bold mb-3">Trader</h3>
+                        <p>Giao dịch với vốn lớn, hưởng % lợi nhuận hấp dẫn</p>
+                    </div>
+                    <div class="bg-white bg-opacity-10 rounded-lg p-6 text-center">
+                        <i class="fas fa-eye text-4xl mb-4"></i>
+                        <h3 class="text-xl font-bold mb-3">Tính minh bạch</h3>
+                        <p>Không giữ tiền → Nhà đầu tư có thể rút vốn bất cứ lúc nào</p>
+                    </div>
+                </div>
+
+                <div class="text-center mt-8">
+                    <h3 class="text-2xl font-bold mb-4">Cơ Hội Đầu Tư Win-Win</h3>
+                    <p class="text-xl mb-6">Hãy tham gia cùng chúng tôi để trải nghiệm mô hình quản lý vốn tiên tiến nhất!</p>
+                    <div class="flex justify-center space-x-4">
+                        <div class="bg-white bg-opacity-20 rounded-lg px-6 py-3">
+                            <i class="fas fa-envelope mr-2"></i>
+                            <span>contact@protrader.fund</span>
+                        </div>
+                        <div class="bg-white bg-opacity-20 rounded-lg px-6 py-3">
+                            <i class="fas fa-phone mr-2"></i>
+                            <span>+84 123 456 789</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Profit Share Chart
+        const ctx = document.getElementById('profitChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Trader Share (30%)', 'Investor Share (70%)'],
+                datasets: [{
+                    data: [30, 70],
+                    backgroundColor: ['#10B981', '#3B82F6'],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
